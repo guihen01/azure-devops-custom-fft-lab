@@ -1,8 +1,8 @@
 trigger:
-- main
+  - main
 
 pool:
-  vmImage: ubuntu-latest
+  vmImage: 'ubuntu-latest'
 
 steps:
 
@@ -11,14 +11,17 @@ steps:
     packageType: 'sdk'
     version: '8.x'
 
-- script: - script: dotnet restore src/CustomFFTConsoleApp/CustomFFTConsoleApp.csproj
-  displayName: Restore Packages
+- script: |
+    dotnet restore src/CustomFFTConsoleApp/CustomFFTConsoleApp.csproj
+  displayName: 'Restore Packages'
 
-- script: - script: dotnet build src/CustomFFTConsoleApp/CustomFFTConsoleApp.csproj --configuration Release
-  displayName: Build Application
+- script: |
+    dotnet build src/CustomFFTConsoleApp/CustomFFTConsoleApp.csproj --configuration Release
+  displayName: 'Build Application'
 
-- script: dotnet publish src/CustomFFTConsoleApp -c Release -o $(Build.ArtifactStagingDirectory)
-  displayName: Publish Application
+- script: |
+    dotnet publish src/CustomFFTConsoleApp/CustomFFTConsoleApp.csproj -c Release -o $(Build.ArtifactStagingDirectory)
+  displayName: 'Publish Application'
 
 - task: PublishBuildArtifacts@1
   inputs:
