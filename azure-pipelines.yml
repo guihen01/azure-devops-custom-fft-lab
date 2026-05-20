@@ -1,0 +1,26 @@
+trigger:
+- main
+
+pool:
+  vmImage: ubuntu-latest
+
+steps:
+
+- task: UseDotNet@2
+  inputs:
+    packageType: 'sdk'
+    version: '8.x'
+
+- script: dotnet restore
+  displayName: Restore Packages
+
+- script: dotnet build --configuration Release
+  displayName: Build Application
+
+- script: dotnet publish src/CustomFFTConsoleApp -c Release -o $(Build.ArtifactStagingDirectory)
+  displayName: Publish Application
+
+- task: PublishBuildArtifacts@1
+  inputs:
+    PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+    ArtifactName: 'custom-fft-app'
