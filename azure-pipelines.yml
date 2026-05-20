@@ -11,10 +11,10 @@ steps:
     packageType: 'sdk'
     version: '8.x'
 
-- script: dotnet restore
+- script: - script: dotnet restore src/CustomFFTConsoleApp/CustomFFTConsoleApp.csproj
   displayName: Restore Packages
 
-- script: dotnet build --configuration Release
+- script: - script: dotnet build src/CustomFFTConsoleApp/CustomFFTConsoleApp.csproj --configuration Release
   displayName: Build Application
 
 - script: dotnet publish src/CustomFFTConsoleApp -c Release -o $(Build.ArtifactStagingDirectory)
